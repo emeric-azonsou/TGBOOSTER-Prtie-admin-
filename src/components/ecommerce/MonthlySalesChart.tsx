@@ -139,7 +139,7 @@ export default function MonthlySalesChart() {
         </div>
       </div>
 
-      <div className="max-w-full overflow-x-auto custom-scrollbar">
+      <div className="max-w-full overflow-x-hidden custom-scrollbar">
         <div className="-ml-5 min-w-[650px] xl:min-w-full pl-2">
           <ReactApexChart
             options={options}

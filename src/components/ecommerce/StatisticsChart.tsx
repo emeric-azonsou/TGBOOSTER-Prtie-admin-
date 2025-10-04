@@ -126,16 +126,13 @@ export default function StatisticsChart() {
           <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
             Statistics
           </h3>
-          <p className="mt-1 text-gray-500 text-theme-sm dark:text-gray-400">
-            Target you’ve set for each month
-          </p>
         </div>
         <div className="flex items-start w-full gap-3 sm:justify-end">
           <ChartTab />
         </div>
       </div>
 
-      <div className="max-w-full overflow-x-auto custom-scrollbar">
+      <div className="max-w-full overflow-x-hidden custom-scrollbar">
         <div className="min-w-[1000px] xl:min-w-full">
           <ReactApexChart
             options={options}
