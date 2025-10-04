@@ -70,17 +70,17 @@ export default function LineChartOne() {
       type: "category", // Category-based x-axis
       categories: [
         "Jan",
-        "Feb",
+        "Fév",
         "Mar",
-        "Apr",
-        "May",
+        "Avr",
+        "Mai",
         "Jun",
         "Jul",
-        "Aug",
+        "Aoû",
         "Sep",
         "Oct",
         "Nov",
-        "Dec",
+        "Déc",
       ],
       axisBorder: {
         show: false, // Hide x-axis border
@@ -110,16 +110,16 @@ export default function LineChartOne() {
 
   const series = [
     {
-      name: "Sales",
+      name: "Revenus",
       data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
     },
     {
-      name: "Revenue",
+      name: "Tâches Complétées",
       data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
     },
   ];
   return (
-    <div className="max-w-full overflow-x-auto custom-scrollbar">
+    <div className="max-w-full overflow-x-hidden custom-scrollbar">
       <div id="chartEight" className="min-w-[1000px]">
         <ReactApexChart
           options={options}
