@@ -11,7 +11,6 @@ import type {
   PaginatedSanctions,
   SanctionStats,
   SanctionType,
-  SanctionStatus,
 } from "@/types/dispute.types";
 
 export class SanctionService {

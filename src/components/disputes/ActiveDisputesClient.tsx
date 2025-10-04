@@ -5,11 +5,10 @@ import Link from "next/link";
 import type {
   PaginatedDisputes,
   DisputeFilters,
-  Dispute,
+  DisputePriority,
 } from "@/types/dispute.types";
 import {
   getDisputes,
-  resolveDispute,
   escalateDispute,
   updateDisputePriority,
 } from "./dispute-actions";
@@ -21,7 +20,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Badge from "@/components/ui/badge/Badge";
 
 interface ActiveDisputesClientProps {
   initialData: PaginatedDisputes;
@@ -60,7 +58,7 @@ export default function ActiveDisputesClient({
   const handlePriorityChange = async (disputeId: string, priority: string) => {
     setIsLoading(true);
     try {
-      await updateDisputePriority(disputeId, priority as any);
+      await updateDisputePriority(disputeId, priority as DisputePriority);
       await handleFiltersChange({});
     } finally {
       setIsLoading(false);
@@ -84,19 +82,6 @@ export default function ActiveDisputesClient({
     }
   };
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case "urgent":
-        return "error";
-      case "high":
-        return "warning";
-      case "normal":
-        return "info";
-      default:
-        return "light";
-    }
-  };
-
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -105,7 +90,7 @@ export default function ActiveDisputesClient({
             className="px-4 py-2 text-sm border border-gray-300 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
             value={filters.priority || "all"}
             onChange={(e) =>
-              handleFiltersChange({ priority: e.target.value as any })
+              handleFiltersChange({ priority: e.target.value as DisputeFilters["priority"] })
             }
             disabled={isLoading}
           >

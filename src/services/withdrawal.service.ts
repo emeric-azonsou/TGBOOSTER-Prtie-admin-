@@ -26,7 +26,6 @@ export class WithdrawalService {
       search = "",
       status = "all",
       paymentMethod = "all",
-      mobileMoneyProvider = "all",
       dateFrom,
       dateTo,
       sortBy = "date",
@@ -218,7 +217,7 @@ export class WithdrawalService {
         })
       );
 
-      const stats = await this.getWithdrawalStats(filters);
+      const stats = await this.getWithdrawalStats();
 
       return {
         withdrawals,
@@ -237,9 +236,7 @@ export class WithdrawalService {
   /**
    * Get withdrawal statistics
    */
-  static async getWithdrawalStats(
-    filters: WithdrawalFilters = {}
-  ): Promise<WithdrawalStats> {
+  static async getWithdrawalStats(): Promise<WithdrawalStats> {
     const supabase = await createClient();
 
     try {

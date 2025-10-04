@@ -3,12 +3,10 @@
  * Type definitions for campaign management across the platform
  */
 
-import type { Database } from "./database.types";
+import type { TaskType, TaskStatus, ExecutionStatus } from "./database.types";
 
-export type TaskType = Database["public"]["Enums"]["task_type_enum"];
-export type TaskStatus = Database["public"]["Enums"]["task_status_enum"];
-export type TaskPriority = Database["public"]["Enums"]["task_priority_enum"];
-export type ExecutionStatus = Database["public"]["Enums"]["execution_status_enum"];
+export type { TaskType, TaskStatus, ExecutionStatus };
+export type TaskPriority = "low" | "normal" | "high" | "urgent";
 
 export interface Campaign {
   task_id: string;

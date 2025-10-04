@@ -107,3 +107,4 @@ $$ LANGUAGE plpgsql;
 
 -- Comment on table
 COMMENT ON TABLE public.sanctions IS 'User sanctions including warnings, suspensions, and bans';
+`

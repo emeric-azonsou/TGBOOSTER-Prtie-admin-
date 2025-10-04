@@ -3,7 +3,7 @@
  * Type definitions for validation history tracking
  */
 
-import type { ExecutionStatus, TaskType } from "./database.types";
+import type { TaskType } from "./database.types";
 
 export type ValidationDecision = "approved" | "rejected";
 

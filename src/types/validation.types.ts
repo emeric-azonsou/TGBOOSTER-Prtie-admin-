@@ -3,10 +3,9 @@
  * Type definitions for task validation system
  */
 
-import type { Database } from "./database.types";
+import type { ExecutionStatus, TaskType } from "./database.types";
 
-export type ExecutionStatus = Database["public"]["Enums"]["execution_status_enum"];
-export type TaskType = Database["public"]["Enums"]["task_type_enum"];
+export type { ExecutionStatus, TaskType };
 
 export interface PendingTaskExecution {
   execution_id: string;

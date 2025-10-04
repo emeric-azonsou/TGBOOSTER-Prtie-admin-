@@ -7,6 +7,7 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import PendingValidationClient from "./PendingValidationClient";
 import { ValidationService } from "@/services/validation.service";
 import type { Metadata } from "next";
+import type { TaskType } from "@/types/campaign.types";
 import { formatRelativeTime } from "@/lib/utils/formatters";
 
 export const metadata: Metadata = {
@@ -32,12 +33,12 @@ export default async function PendingValidationPage({
   const search = params.search || "";
   const type = params.type || "all";
 
-  const [{ tasks, total, totalPages }, stats] = await Promise.all([
+  const [{ tasks, totalPages }, stats] = await Promise.all([
     ValidationService.getPendingTasks({
       page,
       limit: 20,
       search,
-      taskType: type as any,
+      taskType: type as TaskType | "all",
       sortBy: "submittedDate",
       sortOrder: "asc",
     }),
@@ -60,7 +61,7 @@ export default async function PendingValidationPage({
 
           <div className="px-4 py-3 bg-success-50 dark:bg-success-500/10 rounded-lg">
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              Validées Aujourd'hui
+              Validées Aujourd&apos;hui
             </p>
             <p className="text-2xl font-bold text-success-600 dark:text-success-400">
               {stats.approvedToday}
@@ -69,7 +70,7 @@ export default async function PendingValidationPage({
 
           <div className="px-4 py-3 bg-error-50 dark:bg-error-500/10 rounded-lg">
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              Rejetées Aujourd'hui
+              Rejetées Aujourd&apos;hui
             </p>
             <p className="text-2xl font-bold text-error-600 dark:text-error-400">
               {stats.rejectedToday}
@@ -91,7 +92,7 @@ export default async function PendingValidationPage({
         {stats.oldestPending && (
           <div className="px-4 py-3 bg-orange-50 dark:bg-orange-500/10 rounded-lg border border-orange-200 dark:border-orange-500/20">
             <p className="text-sm text-orange-700 dark:text-orange-400">
-              ⚠️ Plus ancienne tâche en attente :{" "}
+              ⚠️ Plus ancienne tâche en attente&nbsp;:{" "}
               <span className="font-semibold">
                 {formatRelativeTime(stats.oldestPending)}
               </span>
@@ -103,7 +104,6 @@ export default async function PendingValidationPage({
           <PendingValidationClient
             initialTasks={tasks}
             initialPage={page}
-            initialTotal={total}
             initialTotalPages={totalPages}
           />
         </ComponentCard>

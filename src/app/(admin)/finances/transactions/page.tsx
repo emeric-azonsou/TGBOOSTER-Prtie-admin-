@@ -21,7 +21,7 @@ export const revalidate = 30; // Revalider toutes les 30 secondes
 
 const getStatusBadgeColor = (
   status: string
-): "success" | "warning" | "error" | "default" => {
+): "success" | "warning" | "error" | "light" => {
   switch (status) {
     case "completed":
       return "success";
@@ -31,7 +31,7 @@ const getStatusBadgeColor = (
     case "cancelled":
       return "error";
     default:
-      return "default";
+      return "light";
   }
 };
 

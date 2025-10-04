@@ -17,19 +17,17 @@ import {
 } from "@/components/ui/table";
 import Pagination from "@/components/campaigns/Pagination";
 import { approveTask, rejectTask, bulkApproveTasks, bulkRejectTasks } from "@/components/validation/actions";
-import type { PendingTaskExecution, TaskType } from "@/types/validation.types";
+import type { PendingTaskExecution } from "@/types/validation.types";
 
 interface PendingValidationClientProps {
   initialTasks: PendingTaskExecution[];
   initialPage: number;
-  initialTotal: number;
   initialTotalPages: number;
 }
 
 export default function PendingValidationClient({
   initialTasks,
   initialPage,
-  initialTotal,
   initialTotalPages,
 }: PendingValidationClientProps) {
   const router = useRouter();

@@ -7,6 +7,7 @@ import PageBreadcrumb from "@/components/common/PageBreadCrumb";
 import AllCampaignsClient from "./AllCampaignsClient";
 import { CampaignService } from "@/services/campaign.service";
 import { Metadata } from "next";
+import type { TaskStatus, TaskType, TaskPriority } from "@/types/campaign.types";
 
 export const metadata: Metadata = {
   title: "Toutes les Campagnes | Admin - TikTok Visibility Platform",
@@ -33,13 +34,13 @@ export default async function AllCampaignsPage({ searchParams }: PageProps) {
   const type = params.type || "all";
   const priority = params.priority || "all";
 
-  const { campaigns, total, totalPages } = await CampaignService.getCampaigns({
+  const { campaigns, totalPages } = await CampaignService.getCampaigns({
     page,
     limit: 20,
     search,
-    status: status as any,
-    type: type as any,
-    priority: priority as any,
+    status: status as TaskStatus | "all",
+    type: type as TaskType | "all",
+    priority: priority as TaskPriority | "all",
     sortBy: "createdDate",
     sortOrder: "desc",
   });
@@ -52,7 +53,6 @@ export default async function AllCampaignsPage({ searchParams }: PageProps) {
           <AllCampaignsClient
             initialCampaigns={campaigns}
             initialPage={page}
-            initialTotal={total}
             initialTotalPages={totalPages}
           />
         </ComponentCard>

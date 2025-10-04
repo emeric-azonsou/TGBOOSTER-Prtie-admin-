@@ -40,7 +40,7 @@ export default function ValidationProofViewer({ task }: ValidationProofViewerPro
         </p>
         {task.executant_notes && (
           <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg max-w-md mx-auto">
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Notes de l'exécutant :</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Notes de l&apos;exécutant&nbsp;:</p>
             <p className="text-sm text-gray-700 dark:text-gray-300">{task.executant_notes}</p>
           </div>
         )}
@@ -65,6 +65,7 @@ export default function ValidationProofViewer({ task }: ValidationProofViewerPro
             Votre navigateur ne supporte pas la lecture de vidéos.
           </video>
         ) : isImage(mainProof) ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={mainProof}
             alt="Preuve soumise"
@@ -108,6 +109,7 @@ export default function ValidationProofViewer({ task }: ValidationProofViewerPro
                   </svg>
                 </div>
               ) : isImage(proof) ? (
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={proof}
                   alt={`Preuve ${index + 1}`}
@@ -129,7 +131,7 @@ export default function ValidationProofViewer({ task }: ValidationProofViewerPro
       {task.executant_notes && (
         <div className="p-4 bg-gray-50 rounded-lg dark:bg-gray-800">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-            Notes de l'exécutant
+            Notes de l&apos;exécutant
           </p>
           <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
             {task.executant_notes}

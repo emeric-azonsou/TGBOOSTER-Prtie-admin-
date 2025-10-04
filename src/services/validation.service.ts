@@ -10,7 +10,6 @@ import type {
   ValidationFilters,
   PaginatedValidations,
   ValidationStats,
-  TaskType,
 } from "@/types/validation.types";
 
 export class ValidationService {

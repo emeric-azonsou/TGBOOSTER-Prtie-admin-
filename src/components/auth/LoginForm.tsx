@@ -4,7 +4,6 @@ import { useState } from "react";
 import { signIn } from "@/app/actions/auth.actions";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
-import Button from "@/components/ui/button/Button";
 import { EyeCloseIcon, EyeIcon } from "@/icons";
 
 export default function LoginForm() {
@@ -21,7 +20,7 @@ export default function LoginForm() {
       if (result?.error) {
         setError(result.error);
       }
-    } catch (err) {
+    } catch {
       setError("Une erreur est survenue lors de la connexion");
     } finally {
       setIsLoading(false);
@@ -57,9 +56,7 @@ export default function LoginForm() {
               name="email"
               type="email"
               placeholder="admin@example.com"
-              required
               disabled={isLoading}
-              autoComplete="email"
             />
           </div>
 
@@ -72,9 +69,7 @@ export default function LoginForm() {
                 name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Entrez votre mot de passe"
-                required
                 disabled={isLoading}
-                autoComplete="current-password"
               />
               <button
                 type="button"
@@ -92,14 +87,13 @@ export default function LoginForm() {
           </div>
 
           <div>
-            <Button
+            <button
               type="submit"
-              className="w-full"
-              size="sm"
+              className="w-full px-4 py-2 text-sm font-medium text-white bg-brand-500 rounded-lg hover:bg-brand-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={isLoading}
             >
               {isLoading ? "Connexion..." : "Se connecter"}
-            </Button>
+            </button>
           </div>
         </form>
 

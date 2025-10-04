@@ -12,7 +12,6 @@ import {
   formatTaskPriority,
 } from "@/lib/utils/formatters";
 import type {
-  Campaign,
   CampaignWithClient,
   CampaignListItem,
   CampaignDetails,
@@ -26,7 +25,6 @@ import type {
   TaskType,
   TaskStatus,
   TaskPriority,
-  ExecutionStatus,
 } from "@/types/campaign.types";
 
 export class CampaignService {

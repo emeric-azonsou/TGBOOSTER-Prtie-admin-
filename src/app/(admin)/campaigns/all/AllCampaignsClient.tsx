@@ -4,7 +4,7 @@
 
 "use client";
 
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import CampaignsTable from "@/components/campaigns/CampaignsTable";
 import CampaignFilters from "@/components/campaigns/CampaignFilters";
@@ -15,14 +15,12 @@ import type { CampaignListItem, TaskType, TaskStatus, TaskPriority } from "@/typ
 interface AllCampaignsClientProps {
   initialCampaigns: CampaignListItem[];
   initialPage: number;
-  initialTotal: number;
   initialTotalPages: number;
 }
 
 export default function AllCampaignsClient({
   initialCampaigns,
   initialPage,
-  initialTotal,
   initialTotalPages,
 }: AllCampaignsClientProps) {
   const router = useRouter();

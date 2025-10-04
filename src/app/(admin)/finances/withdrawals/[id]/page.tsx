@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const getStatusBadgeColor = (
   status: string
-): "success" | "warning" | "error" | "default" => {
+): "success" | "warning" | "error" | "light" => {
   switch (status) {
     case "completed":
     case "approved":
@@ -23,7 +23,7 @@ const getStatusBadgeColor = (
     case "rejected":
       return "error";
     default:
-      return "default";
+      return "light";
   }
 };
 
@@ -68,7 +68,7 @@ export default async function WithdrawalVerificationPage({
         <PageBreadcrumb pageTitle="Retrait non trouvé" />
         <ComponentCard title="Erreur">
           <p className="text-gray-600 dark:text-gray-400">
-            Cette demande de retrait n'existe pas ou a été supprimée.
+            Cette demande de retrait n&apos;existe pas ou a été supprimée.
           </p>
         </ComponentCard>
       </div>

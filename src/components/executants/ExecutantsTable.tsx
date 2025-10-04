@@ -136,9 +136,11 @@ export default function ExecutantsTable({ executants }: ExecutantsTableProps) {
                       {executant.email}
                     </p>
                     {executant.isVerified && (
-                      <Badge size="sm" color="success" className="mt-1">
-                        Vérifié
-                      </Badge>
+                      <div className="mt-1">
+                        <Badge size="sm" color="success">
+                          Vérifié
+                        </Badge>
+                      </div>
                     )}
                   </div>
                 </div>

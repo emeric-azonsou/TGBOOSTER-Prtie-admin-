@@ -10,7 +10,6 @@ import type {
   DisputeFilters,
   PaginatedDisputes,
   DisputeStats,
-  DisputeStatus,
   DisputePriority,
   DisputeResolution,
 } from "@/types/dispute.types";

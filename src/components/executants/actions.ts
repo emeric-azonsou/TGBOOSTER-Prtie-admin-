@@ -12,7 +12,7 @@ import { ExecutantService } from "@/services/executant.service";
  */
 export async function verifyExecutant(executantId: string) {
   try {
-    await ExecutantService.verifyExecutant(executantId, "verified");
+    await ExecutantService.verifyExecutant(executantId, "full_verified");
     revalidatePath(`/users/executants/${executantId}`);
     revalidatePath("/users/executants");
     return { success: true };

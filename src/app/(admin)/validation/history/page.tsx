@@ -35,7 +35,7 @@ export default async function ValidationHistoryPage() {
               {historyData.summary.totalApproved}
             </div>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {historyData.summary.approvalRate.toFixed(1)}% de taux d'approbation
+              {historyData.summary.approvalRate.toFixed(1)}% de taux d&apos;approbation
             </p>
           </ComponentCard>
 

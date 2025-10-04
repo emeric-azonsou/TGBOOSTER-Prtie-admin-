@@ -3,7 +3,7 @@
  * Types for system administration, logging, and monitoring
  */
 
-export type AdminRole = "global" | "moderator" | "operations" | "support" | "read_only";
+export type AdminRoleType = "global" | "moderator" | "operations" | "support" | "read_only";
 export type AdminStatus = "active" | "inactive" | "suspended";
 export type LogAction =
   | "user_created"
@@ -35,7 +35,7 @@ export type EntityType =
 export interface AdminRole {
   id: string;
   user_id: string;
-  role: AdminRole;
+  role: AdminRoleType;
   status: AdminStatus;
   permissions?: string[];
   created_at: string;
@@ -57,7 +57,7 @@ export interface AdminLog {
 export interface AdminLogWithUser extends AdminLog {
   admin_name: string;
   admin_email: string;
-  admin_role: AdminRole;
+  admin_role: AdminRoleType;
 }
 
 export interface LogFilters {

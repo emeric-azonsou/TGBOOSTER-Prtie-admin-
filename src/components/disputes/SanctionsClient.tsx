@@ -96,7 +96,7 @@ export default function SanctionsClient({
           <select
             className="px-4 py-2 text-sm border border-gray-300 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
             value={filters.status || "active"}
-            onChange={(e) => handleFiltersChange({ status: e.target.value as any })}
+            onChange={(e) => handleFiltersChange({ status: e.target.value as SanctionFilters["status"] })}
             disabled={isLoading}
           >
             <option value="active">Actives</option>
@@ -107,7 +107,7 @@ export default function SanctionsClient({
             className="px-4 py-2 text-sm border border-gray-300 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
             value={filters.sanctionType || "all"}
             onChange={(e) =>
-              handleFiltersChange({ sanctionType: e.target.value as any })
+              handleFiltersChange({ sanctionType: e.target.value as SanctionFilters["sanctionType"] })
             }
             disabled={isLoading}
           >

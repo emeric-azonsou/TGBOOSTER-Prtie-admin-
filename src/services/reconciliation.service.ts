@@ -121,7 +121,7 @@ export class ReconciliationService {
         })
       );
 
-      const stats = await this.getReconciliationStats(filters);
+      const stats = await this.getReconciliationStats();
 
       return {
         reconciliations,
@@ -140,9 +140,7 @@ export class ReconciliationService {
   /**
    * Get reconciliation statistics
    */
-  static async getReconciliationStats(
-    filters: ReconciliationFilters = {}
-  ): Promise<ReconciliationStats> {
+  static async getReconciliationStats(): Promise<ReconciliationStats> {
     const supabase = await createClient();
 
     try {
