@@ -122,6 +122,8 @@ export class ClientService {
     const supabase = await createClient();
 
     try {
+      console.log("[ClientService] Fetching client with ID:", clientId);
+
       // Get user profile
       const { data: user, error: userError } = await supabase
         .from("user_profiles")
@@ -130,24 +132,99 @@ export class ClientService {
         .eq("user_type", "client")
         .single();
 
+      console.log("[ClientService] User query result:", { user, userError });
+
       if (userError) throw userError;
-      if (!user) return null;
+      if (!user) {
+        console.log("[ClientService] User not found for ID:", clientId);
+        return null;
+      }
 
       // Get client profile
       const { data: profile, error: profileError } = await supabase
         .from("client_profiles")
         .select("*")
         .eq("client_id", clientId)
-        .single();
+        .maybeSingle();
 
-      if (profileError) throw profileError;
+      console.log("[ClientService] Profile query result:", { profile, profileError });
+
+      if (profileError) {
+        console.error("[ClientService] Profile error:", profileError);
+        throw profileError;
+      }
+
+      // If no profile exists, create one
+      if (!profile) {
+        console.log("[ClientService] No profile found, creating one for:", clientId);
+        try {
+          const { data: newProfile, error: createError } = await supabase
+            .from("client_profiles")
+            .insert({
+              client_id: clientId,
+              company_name: `${user.first_name} ${user.last_name} Company`,
+              business_type: 'Entreprise Individuelle',
+              is_verified: false,
+            })
+            .select()
+            .single();
+
+          if (createError) {
+            console.error("[ClientService] Error creating profile:", createError);
+            throw createError;
+          }
+
+          console.log("[ClientService] Profile created successfully:", newProfile);
+
+          // Get wallet or create one
+          let { data: wallet, error: walletFetchError } = await supabase
+            .from("client_wallets")
+            .select("*")
+            .eq("client_id", clientId)
+            .maybeSingle();
+
+          console.log("[ClientService] Wallet fetch result:", { wallet, walletFetchError });
+
+          if (!wallet) {
+            console.log("[ClientService] No wallet found, creating one for:", clientId);
+            const { data: newWallet, error: walletCreateError } = await supabase
+              .from("client_wallets")
+              .insert({
+                client_id: clientId,
+                balance_cents: 0,
+                total_spent_cents: 0,
+                currency_code: 'XOF',
+              })
+              .select()
+              .single();
+
+            if (walletCreateError) {
+              console.error("[ClientService] Error creating wallet:", walletCreateError);
+            } else {
+              console.log("[ClientService] Wallet created successfully:", newWallet);
+              wallet = newWallet;
+            }
+          }
+
+          return {
+            user,
+            profile: newProfile,
+            wallet: wallet || undefined,
+          };
+        } catch (createErr) {
+          console.error("[ClientService] Exception during profile/wallet creation:", createErr);
+          throw createErr;
+        }
+      }
 
       // Get wallet
-      const { data: wallet } = await supabase
+      const { data: wallet, error: walletError } = await supabase
         .from("client_wallets")
         .select("*")
         .eq("client_id", clientId)
-        .single();
+        .maybeSingle();
+
+      console.log("[ClientService] Wallet query result:", { wallet, walletError });
 
       return {
         user,
@@ -155,7 +232,7 @@ export class ClientService {
         wallet: wallet || undefined,
       };
     } catch (error) {
-      console.error("Error fetching client:", error);
+      console.error("[ClientService] Error fetching client:", error);
       return null;
     }
   }
